@@ -15,14 +15,17 @@
 					alt="User image"
 					class="avatar"
 				/>
-				<div class="is-followed btn btn-primary">
+				<button
+					class="is-followed btn btn-primary"
+					@click="handleFollow(user.id)"
+				>
 					<img
 						src="../assets/icons/user-plus.svg"
 						alt="User plus icon"
 						class="plus"
 					/>
 					<span>Follow</span>
-				</div>
+				</button>
 			</div>
 
 			<div class="card-title">
@@ -82,9 +85,18 @@
 </template>
 
 <script>
+import { inject } from 'vue';
+
 export default {
 	name: 'UserCard',
 	props: ['user'],
+	setup() {
+		const handleFollow = inject('handleFollow');
+
+		return {
+			handleFollow,
+		};
+	},
 };
 </script>
 

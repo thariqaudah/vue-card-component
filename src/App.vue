@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import { ref } from 'vue';
+import { provide, ref } from 'vue';
 import Card from './components/Card.vue';
 
 export default {
@@ -51,6 +51,19 @@ export default {
 				isFollowed: false,
 			},
 		]);
+
+		const handleFollow = userId => {
+			console.log(userId);
+			users.value.map(user => {
+				if (user.id === userId) {
+					user.isFollowed = !user.isFollowed;
+				}
+
+				return user;
+			});
+		};
+
+		provide('handleFollow', handleFollow);
 
 		return {
 			users,
@@ -129,6 +142,18 @@ body {
 
 				.card-details {
 					font-size: 12px;
+				}
+
+				.card-socials {
+					.social-link {
+						width: 26px;
+						height: 26px;
+
+						.social-icon {
+							width: 20px;
+							height: 20px;
+						}
+					}
 				}
 			}
 		}
